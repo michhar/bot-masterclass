@@ -1,6 +1,6 @@
 # Bing News Search
 
-What's it like to be an intelligent reporter these days?  Well, if we know how to code, it's a no-brainer.  We use an API to consume a trained model!  And since we are the proud geeks we are, let's ask Bing for the top stories around science and technology...
+So, we're just starting our new careers as reporters.  We love data science and are clever programmers.  Well, then it's pretty clear what must be done.  We use an API to consume a trained model!  And since we are the proud geeks we are, let's ask Bing for the top stories around science and technology...
 
 
 ## First we need the keys
