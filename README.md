@@ -9,6 +9,14 @@ This tutorial is designed for developers and data scientists. It will ramp up th
 
 Instructor: Micheleen Harris (michhar\<at\>microsoft\<dot\>com)
 
+## Quick Links
+
+* Cognitive Services APIs:  https://www.microsoft.com/cognitive-services/en-us/documentation
+* Cognitive Services Subscriptions:  https://www.microsoft.com/cognitive-services/en-US/subscriptions
+* Bot Framework:  https://botframework.com
+* Some super useful Bot Framework resources:  https://blogs.msdn.microsoft.com/smich/2016/09/30/microsoft-bot-framework-resources
+* If you're curious - Microsoft privacy statement for Cognitive Services and Translator etc.: https://privacy.microsoft.com/en-us/privacystatement
+
 ## Duration
 
 4 Hrs
@@ -39,6 +47,6 @@ We will assume you have already have the following background:
 
 ## Agenda
 
-* **1st Hr**:  Welcome, Node.js Primer and Peek into Microsoft Cognitive Services
+* **1st Hr**:  Welcome, Bootcamp and Peek into Microsoft Cognitive Services
 * **2nd Hr**:  Dive into the Microsoft Bot Framework with Exercises
 * **3rd and 4th Hr**:  Mars Mission Hands-On Lab and Closing (What Next?)
