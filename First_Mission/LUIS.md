@@ -9,12 +9,12 @@ LUIS allows us to detect what the user wants based on the sentence they send, wh
 For example, let's say a user says "What's the news in `Paris` on `Thursday`?". Using LUIS, we can tell that the intent is to "GetNews" while the entities are location ("Paris") and date ("Thursday"). This allows the program to know that the user wants to find news at the location and date specified.
 
 ## Activating LUIS
-First, login to [LUIS.AI](https://luis.ai) using your personal Microsoft account or work/school account. 
+First, login to [LUIS.AI](https://www.luis.ai) using your personal Microsoft account or work/school account. 
 
 Hover over your name on the top right and click Settings. Go to the "Subscription Keys" tab where you can enter the subscription key you generated on Azure.
 
 ## Making a new LUIS app
-Go back to the [LUIS.AI](https://luis.ai) page and click Create New Application.
+Go back to the [LUIS.AI](https://www.luis.ai) page and click Create New Application.
 
 Fill up the form:
 - Name can be set to anything you want
@@ -39,23 +39,19 @@ We can use the + button to add a new intent. Let's add "GetNews" for now. As an 
 
 ![NewIntent](https://raw.githubusercontent.com/alyssaong1/HOL-NUSHackathon/master/Images/Luis/NewIntent.PNG)
 
-After clicking save, we will be able to label the entity in the utterance and it should automatically label the intent as GetNews and entity as geography.
-
-![NewIntentLabel](https://raw.githubusercontent.com/alyssaong1/HOL-NUSHackathon/master/Images/Luis/NewIntentLabel.PNG)
-
-When you're done, click submit.
+After clicking OK, our model should automatically label the intent as GetNews and entity as geography for geographical locations.
 
 ## More utterances
-In order for LUIS to perform better, you need to give it more examples of an intent.
+In order for LUIS to perform better, you need to give it more examples of an intent.  Usually we need a minimum of 5 per entity per intent.
 
-Let's add another utterance saying "Get me the news in Paris please".
+Let's add another utterance saying "Get me the news in Paris please".  Go ahead and add a few more.  You can try off the wall ones like "I'm from Mars" to see how well it does labeling as None.
 
-![NewUtterance](https://raw.githubusercontent.com/alyssaong1/HOL-NUSHackathon/master/Images/Luis/NewUtterance.PNG)
+![NewUtterance](https://raw.githubusercontent.com/michhar/bot-masterclass/master/Extras/images/LabelUtterence.png)
 
 - Select the correct intent from the dropdown box, in this case being "GetNews".
-- Select the word "Paris" and make sure to label it as Location.
+- Select the word "Paris" and make sure it is labeled as geography.
 
-Now that LUIS has another piece of data to work with, it is now able to understand when the user wants to get news with greater accuracy. If you want to, you can keep adding more utterances to improve understanding.  It is recommended to add 5 utterences with labels per Intent per Entity.
+Now that LUIS has more data to work with, it is now able to understand when the user wants to get news with greater accuracy. If you want to, you can keep adding more utterances to improve understanding.
 
 ## Publishing LUIS
 To make sure that our LUIS service is accessible by the bot, we first need to publish it.
