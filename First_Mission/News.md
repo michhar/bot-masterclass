@@ -7,6 +7,8 @@ So, we're just starting our new careers as reporters.  We love data science and 
 
 We're going to head on over to the Cognitive Services subscriptions site and get our free Bing Search key.  We'll need our MS Account (if you sign in to a **Windows PC, tablet, or phone, Xbox Live, Outlook.com, Hotmail.com or OneDrive, use that account** or really any MS service/device, otherwise you can use any email address to get one [here](https://signup.live.com) or even sign up for Outlook.com [here](https://www.microsoft.com/en-us/outlook-com/)).  Whew.
 
+Our mission is as follows:
+
 1.  Go [here](https://www.microsoft.com/cognitive-services/en-US/subscriptions) to get to subscriptions and log in with your Microsoft Account (see the note right above if you don't have one).
 2.  You very well may need to verify your MS account so please do that to unlock the wonders of these APIs.
 3.  Now you will be able click on the big "+" sign to "Subscribe to new free trials".
@@ -17,9 +19,10 @@ Congratulations, you completed a mostly pain-free process and have access to Bin
 
 ## Get the Science and Tech Top Stories
 
-Add this bit of code to your `server.js` from the Bootcamp exercise:
+As the next step in our mission, we add this bit of code to our `server.js` from the Bootcamp exercise:
 
 ```javascript
+var request = require('request');
 
 server.get('/news', function(req, res, next) {
         // Build the url we'll be calling to get top news
