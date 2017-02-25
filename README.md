@@ -1,5 +1,8 @@
 # Welcome to the Developing and Deploying Intelligent Chat Bots Class
 
+[![Join the chat at https://gitter.im/conf-bots/Lobby](https://badges.gitter.im/conf-bots/Lobby.svg)](https://gitter.im/analytics-at-ms/conf-bots?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+
+
 ## Introduction
 
 This tutorial is designed for developers and data scientists. It will ramp up the attendee quickly on the Microsoft Bot Framework as a development tool/portal and the Cognitive Services APIs for intelligence, linking the two in the creation of an intelligent chat bot for conversational platforms. Thoughtful design, much like in Data Science, as well as user experience will be emphasized to create the best bot experiences.
