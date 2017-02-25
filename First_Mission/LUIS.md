@@ -44,12 +44,12 @@ After clicking OK, our model should automatically label the intent as GetNews an
 ## More utterances
 In order for LUIS to perform better, you need to give it more examples of an intent.  Usually we need a minimum of 5 per entity per intent.
 
-Let's add another utterance saying "Get me the news in Paris please".  Go ahead and add a few more.  You can try off the wall ones like "I'm from Mars" to see how well it does labeling as None.
+Let's add another utterance saying "Can I get the news in London".  Go ahead and add a few more.  You can try off the wall ones like "I'm from Mars" to see how well it does labeling as None.
 
 ![NewUtterance](https://raw.githubusercontent.com/michhar/bot-masterclass/master/Extras/images/LabelUtterence.png)
 
 - Select the correct intent from the dropdown box, in this case being "GetNews".
-- Select the word "Paris" and make sure it is labeled as geography.
+- Select the word "London" and make sure it is labeled as geography.
 
 Now that LUIS has more data to work with, it is now able to understand when the user wants to get news with greater accuracy. If you want to, you can keep adding more utterances to improve understanding.
 
