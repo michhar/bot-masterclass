@@ -1,15 +1,14 @@
-
-```javascript
-
-/*-----------------------------------------------------------------------------
 This Bot is part of a lab on how to create a simple hello world, dialog stack/promts and 
 old vs. new style (v3.5) bot.  Sections will be uncommented and modified.
 
 # RUN THE BOT:
-    Run the bot from the command line using "node server.js" and then type 
-    anything to wake the bot up.
-    
------------------------------------------------------------------------------*/
+* Name your file `server.js` or somtehing similar
+* Run the bot from the command line using `node server.js` or whatever you named the file and then type anything to wake the bot up.
+
+
+Let's get the basic bits we always have.  Explanation after.
+
+```javascript
 
 // Required packages
 var builder = require('botbuilder');
@@ -32,7 +31,11 @@ server.post('/api/messages', connector.listen());
 server.listen(process.env.port || process.env.PORT || 3978, function () { 
     console.log('%s listening to %s', server.name, server.url); 
 });
+```
 
+Now let's create our bot and modify it's dialogs to create different experiences.
+
+```javascript
 //********************* EXAMPLES ************************* */
 // Uncomment out each individually to run
 
@@ -47,6 +50,12 @@ bot.dialog('/', function (session) {
 });
 
 // get to name with session.userData.name -> will this work locally?
+```
+
+Now that we've got "Hello World" out of the way, let's dig in to some much more interesting stuff.  Just for your reference, however, the "Hello world" bot is an example of a **closure**.
+
+```javascript
+
 
 /************* Example 2 **************/
 
