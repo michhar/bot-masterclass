@@ -4,30 +4,60 @@
 
 Go to MISSION1 and learn about dialogs and waterfalls.
 
-That's right, MISSION2 is next.  This will lead you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
+Then MISSION2 will lead you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
 
+
+## Prerequisites
+
+Fufill those listed on the wiki on the main [README](../README.md).
 
 ## Set up project
 
-Here are some general directions on setting up a project for use with Node.js.  Remember always to find out if you have your correct packages in the directory.  At first you'll look for a `package.json` in your project or given to you somehow.  Don't worry, there's instructions on what to do if it's not there.  You'll end up automatically, after following the directions below, with a folder called `node_modules`.
+> On Windows, Mac and Unix, the instructions are pretty much the same.
+
+Here are some general directions on setting up a project for use with Node.js.  Remember always to find out if you have your correct packages in the directory.  At first you'll look for a `package.json` in your project or given to you somehow.  Don't worry, there's instructions on what to do if it's not there.  You'll end up, after all package installs, with a folder called `node_modules`.
 
 ### If you have a package.json
 
-Create a folder for your bot, cd into it, copy all code over and run npm install to install all things in package.json.  So, in terminal type:
+Create a folder for your bot, cd into it, and run npm install to install all libraries in package.json.  So, if you have a package.json, in terminal type:
 
     npm install
 
 
 ### If there is **no** package.json
 
-Create a folder for your bot, `cd` into it, and run an initializing command to begin a project (it alsow creates a `package.json` file for you to add to).  `npm` is the node package manager.  So, in terminal type:
+Create a folder for your bot, `cd` into it, and run an initializing command to begin a project (it also creates a `package.json` file for you to add to).  `npm` is the node package manager.  So, in terminal type:
 
     npm init
     
-Get the BotBuilder (let's use `3.6.0` for now) and restify modules using npm.
+Get the BotBuilder (let's use `3.6.0` for now) and restify libraries using npm.
 
     npm install --save botbuilder@3.6.0
     npm install --save restify
+
+### Setup Environment
+
+Ensure you have the emulator installed (found in the prereqs link above).  See, also, [this](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started#get-up-and-running) to get up and running with emulator.
+
+### Visual Studio Code or Code Editor/IDE
+
+You will use your editor to create the server-side code in a file I often call `server.js` (and will reference it as such here), but you can name it `app.js`, `catsarebetterthandogs.js` or something a bit more descriptive.
+
+## Testing Locally
+
+When going through MISSION1 and 2 and piecing together your code, you will test it in this manner:
+
+3.  Open the folder, where your newly created package.json exists for each mission, in VSCode.
+3.  You can start the process in the command terminal (you can use VSCode's integrated terminal under the "View" menu option) and type into the commmand prompt:
+  - `node server.js`
+  > Doesn't work? Windows not able to find the node command?  Try adding `NODE_PATH` as a System variable in the Advanced tab of the System Properties dialog and set to the path `%AppData%\npm\node_modules` (Windows 7/8/10) or wherever npm was installed.
+5.  You can now open the emulator (make sure this is in your PATH or go to its folder or search for "botframework-emulator").
+*  Click on "Enter your endpoint URL", click on the URL, or enter
+    `http://localhost:3978/api/messages` into the endpoint field
+  and keep App ID and App Password empty, hit "Connect" (more info [here](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started#connect-to-a-bot-running-on-localhost)).
+* Test with a few phrases that reflect the logic of your app.  You can always try "hi" and "bye" and see if your bot is a successful bot.  If not read back through the instructions and try, try again.
+
+
 
 ## Test Locally with the botemulator
 
