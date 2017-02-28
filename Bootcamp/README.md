@@ -64,11 +64,11 @@ We'll go through these together or if you are reading this later, you'll get to 
 4.  Replace "respond" in the "server.get('/hello/:name'..." route with this code chunk and see what happens.
 
 ```javascript
-    function respond(req, res, next) {
+    function respond1(req, res, next) {
         console.log("Do something in first handler");
         return next();
     },
-    function respond(req, res, next) {
+    function respond2(req, res, next) {
         res.send('Hello now ' + req.params.name);
         return next();
     }
@@ -76,7 +76,7 @@ We'll go through these together or if you are reading this later, you'll get to 
 
 
 
-### Advance exercise
+### Advanced exercise
 
 (For the brave) Add the following route for a POST HTTP request (post:  Takes a complete object to serialize from client and sends to the server.)
 
