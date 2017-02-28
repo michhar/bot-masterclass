@@ -30,7 +30,7 @@ After clicking your LUIS app, you should be directed to a page. The left sidebar
 ### Making a new entity
 Let's first add a new pre-built entity for "geography" by clicking the plus button for "Pre-built Entities".
 
-![NewEntity](https://raw.githubusercontent.com/alyssaong1/HOL-NUSHackathon/master/Images/Luis/NewEntity.PNG)
+![NewEntity](https://raw.githubusercontent.com/michhar/bot-masterclass/master/Extras/images/PrebuiltEntity.jpg)
 
 ### Making a new intent
 The default intent is "None", which will be used whenever no intent is detected from a user's sentence.
