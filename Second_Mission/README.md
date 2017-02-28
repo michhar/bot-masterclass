@@ -1,6 +1,15 @@
-# Build a bot 
+# Welcome to Botland!
+
+## Your Mission
+
+Go to MISSION1 and learn about dialogs and waterfalls.
+
+That's right, MISSION2 is next.  This will lead you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
+
 
 ## Set up project
+
+Here are some general directions on setting up a project for use with Node.js.  Remember always to find out if you have your correct packages in the directory.  At first you'll look for a `package.json` in your project or given to you somehow.  Don't worry, there's instructions on what to do if it's not there.  You'll end up automatically, after following the directions below, with a folder called `node_modules`.
 
 ### If you have a package.json
 
@@ -9,35 +18,32 @@ Create a folder for your bot, cd into it, copy all code over and run npm install
     npm install
 
 
-### If there is no package.json
+### If there is **no** package.json
 
-Create a folder for your bot, cd into it, and run npm init to begin a project.  So, in terminal type:
+Create a folder for your bot, `cd` into it, and run an initializing command to begin a project (it alsow creates a `package.json` file for you to add to).  `npm` is the node package manager.  So, in terminal type:
 
     npm init
     
-Get the BotBuilder (use latest when saving botbuilder below, otherwise just `3.5.4`) and Restify modules using npm.
+Get the BotBuilder (let's use `3.6.0` for now) and restify modules using npm.
 
-    npm install --save botbuilder@3.5.4
+    npm install --save botbuilder@3.6.0
     npm install --save restify
 
-## Test Locally
+## Test Locally with the botemulator
 
-Back in terminal:
+Back in terminal run your app with:
 
     node server.js
 
 In the botemulator desktop app:
 
+* Click in the empty space asking for an Endpoint URL at the top and some choices should pop up
 * Select app on port (usually 3978)
 * Keep app id and app password blank
 * Hit connect
 * Type a message to the bot and wait for a response (you could start with "Hey bot!" or "Bye")
 
-## Exercises
-
-Take a look at the `server.js` in this folder in VSCode or chosen editor.  Follow along in the code, commenting and uncommenting sections, to create different bot experiences.
-
-Have some fun!
+Try things out in the code and follow all of the exercises in the MISSION files.  Have fun!
 
 
 
