@@ -4,7 +4,7 @@
 
 Go to MISSION1 and learn about dialogs and waterfalls.
 
-Then MISSION2 will lead you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
+Next, move on to MISSION2 which leads you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
 
 
 ## Prerequisites
@@ -50,30 +50,18 @@ When going through MISSION1 and 2 and piecing together your code, you will test 
 3.  Open the folder, where your newly created package.json exists for each mission, in VSCode.
 3.  You can start the process in the command terminal (you can use VSCode's integrated terminal under the "View" menu option) and type into the commmand prompt:
   - `node server.js`
-  > Doesn't work? Windows not able to find the node command?  Try adding `NODE_PATH` as a System variable in the Advanced tab of the System Properties dialog and set to the path `%AppData%\npm\node_modules` (Windows 7/8/10) or wherever npm was installed.
+  
+  > Doesn't work? Windows not able to find the node command?  First make sure you've run `npm install` as described above.  Try adding `NODE_PATH` as a System variable in the Advanced tab of the System Properties dialog and set to the path `%AppData%\npm\node_modules` (Windows 7/8/10) or wherever npm was installed.
 5.  You can now open the emulator (make sure this is in your PATH or go to its folder or search for "botframework-emulator").
-*  Click on "Enter your endpoint URL", click on the URL, or enter
-    `http://localhost:3978/api/messages` into the endpoint field
-  and keep App ID and App Password empty, hit "Connect" (more info [here](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started#connect-to-a-bot-running-on-localhost)).
-* Test with a few phrases that reflect the logic of your app.  You can always try "hi" and "bye" and see if your bot is a successful bot.  If not read back through the instructions and try, try again.
-
-
-
-## Test Locally with the botemulator
-
-Back in terminal run your app with:
-
-    node server.js
-
-In the botemulator desktop app:
-
-* Click in the empty space asking for an Endpoint URL at the top and some choices should pop up
-* Select app on port (usually 3978)
-* Keep app id and app password blank
-* Hit connect
-* Type a message to the bot and wait for a response (you could start with "Hey bot!" or "Bye")
+6.  In the botemulator desktop app:
+    * Click in the empty space asking for an Endpoint URL at the top and some choices should pop up
+    * Select app on port (usually 3978)
+    * Keep app id and app password blank
+    * Hit connect
+    * Type a message to the bot and wait for a response (you could start with "Hey bot!" or "Bye")
 
 Try things out in the code and follow all of the exercises in the MISSION files.  Have fun!
 
+More info on connecting to a bot on localhost [here](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started#connect-to-a-bot-running-on-localhost)
 
 
