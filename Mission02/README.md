@@ -29,7 +29,7 @@ Packages (or dependencies) are like parts/modules that others have written which
 
 Open up Visual Studio Code. Go to File > Open Folder... and select your bot's folder. You should be able to see your file structure on the left panel, it'll look something like this:
 
-![vscode structure](vscode_structure.png)
+![vscode structure](../Extras/images/vscode_structure.png)
 
  The `node_modules` folder contains all the packages needed in our project. If you look into the folder, you'll see more than just BotBuilder and Restify - that's because they require other packages to work as well. Right click the left panel area and create a new file. Name it `server.js`.
 
