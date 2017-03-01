@@ -1,15 +1,14 @@
-# Welcome to Botland!
+# Introduction to conversational apps
 
 ## Your Mission
 
-Go to MISSION1 and learn about dialogs and waterfalls.
+In `Dialogs.md` you will learn about dialog handling and logic.
 
-Next, move on to MISSION2 which leads you down a path of building recognizers (with smarts) and, hence, the intents of our clients.
-
+`Recognizers.md` leads you down a path of building recognizers to intelligently pick up the intents of our clients.
 
 ## Prerequisites
 
-Fufill those listed on the wiki on the main [README](../README.md).
+Ensure you have fufilled those listed on the main [README](../README.md) for this course.
 
 ## Set up project
 
