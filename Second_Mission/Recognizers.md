@@ -1,4 +1,8 @@
-## LUIS Model
+## Recognizers in action
+
+This Bot demonstrates how to use an `EntityRecognizer` and `LuisRecognizer` along with an existing LUIS application to add quick functionality and natural language support to a bot.
+
+### LUIS Model
 
 We will use LUIS again, but this time you will use a feature in the LUIS portal that allows us to import all of the intents, entities and utterences saved by another app creator (how kind!).
 
@@ -7,35 +11,17 @@ We will use LUIS again, but this time you will use a feature in the LUIS portal 
 3.  In LUIS portal click on "+New App" and then "Import Existing Application"
 4.  Select our ConfApp.json file and give the app a name then click "Import".
 5.  You should now be able to see in the app intents such as "wherespeaker" and entities such as "talk_title".
+6.  Enter some more utterences and label them.
+7.  Retrain using the Train button.
+8.  Click on Publish and publish this app, noting the URL endpoint given (we'll use in a minute).
 
+### Testing locally
 
+We saw how to initialize our project in `Dialogs.md` so refer back if you have a new folder without a `package.json` file.
+
+Also, in `Dialogs.md` we learnt about the basic components we begin with for a bot app in the Bot Framework.  Let's add these to our new `server.js` file.
 
 ```javascript
-
-/*-----------------------------------------------------------------------------
-This Bot demonstrates how to use an EntityRecognizer and LuisRecognizer along
-with a Cortana pre-built LUIS application to add quick functionality and
-natural language support to a bot. The example also shows how to use 
-UniversalBot.send() to push notifications to a user.
-
-It's part of the bot-education labs.
-
-Based loosely on this bot(s):  
-- https://github.com/Microsoft/BotBuilder/blob/master/Node/examples/basics-naturalLanguage/app.js
-
-Worth looking at the custom intent recognizer option as well:
-- https://github.com/Microsoft/BotBuilder/blob/master/Node/examples/feature-customRecognizer/app.js
-
-For a complete walkthrough of creating an alarm bot see the article below (an alternative setup with LUIS)
-Notice the many changes from this documentation.  Still a valid approach, however.
-    http://docs.botframework.com/builder/node/guides/understanding-natural-language/
-
-List of pre-built cortana entities from LUIS: https://www.luis.ai/Help#PreBuiltApp
-
-Try this out with a test dialog ("hello", "set appointment", "test name", "hello again"...).
-Does it work as expected?  Any changes needed?
-
------------------------------------------------------------------------------*/
 
 // Required packages
 var builder = require('botbuilder');
@@ -54,19 +40,27 @@ var connector = new builder.ChatConnector(botConnectorOptions);
 
 // Handle Bot Framework messages with a restify server
 var server = restify.createServer();
+
+// A POST method to gather the input from the user, employing the connector
 server.post('/api/messages', connector.listen());
 server.listen(process.env.port || process.env.PORT || 3978, function () { 
     console.log('%s listening to %s', server.name, server.url); 
 });
 
-//********************* EXAMPLE ************************* */
+```
 
-// The model_url of format:  
-//   https://api.projectoxford.ai/luis/v2.0/apps/[model id goes here]?subscription-key=[key goes here]
-//  Fill in the parts in [] with your model information
-var model_url = process.env.LUIS_MODEL || "https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/c3b5b76b-23e0-4b93-9822-f037975a6b22?subscription-key=01da21fa37f542bc8b3d20f1282fc02b";
+Next, we define our recognizer using our LUIS model's endpoint URL from the LUIS.AI portal.
 
-// Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Cortana Bot.
+* Can you add more than one recognizer of intents?  Can you have more than one LUIS model?
+
+
+
+```
+// The model_url of format
+//  Replace the [] with your model information
+var model_url = process.env.LUIS_MODEL || "https://api.projectoxford.ai/luis/v2.0/apps/[model id goes here]?subscription-key=[key goes here]";
+
+// Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Bot.
 var recognizer = new builder.LuisRecognizer(model_url);
 var intents = new builder.IntentDialog({ recognizers: [recognizer] });
 
@@ -109,11 +103,33 @@ bot.dialog('/help', function (session) {
 }
 // a trigger for dialog added here for help
 ).triggerAction({ matches: /^help|^Help/i });
+```
 
-/************************* ADVANCED EXERCISE *************************/
+Next, I'll leave it to you to add the wheretalk.
 
-// Add options to enter date and time.
+* How well is this app performing?  Have you tried "Suggest" in the LUIS.AI portal for this model?  Go ahead and try this out.  Label anything that needs an label and hit "Submit".
 
+[This snippet](https://github.com/michhar/bot-education/tree/master/Student-Resources/BOTs/Node/bot-simpleintent) was taken from another bot-education repo in which simple (non-LUIS) intents are being handled.  Try adding this snippet to the above code.
+
+* Are there other ways to incorporate this snippet?
+
+```javascript
+// Just-say-hi intent logic
+intents.matches(/^hi|^Hi|^hello|^Hello|^hey|^howdy/i, function(session) {
+    session.send("Hi there!");
+});
+```
+
+
+### Advanced exercise
+
+Add options to enter date and time to the LUIS model and handle the behavior in this app with dialogs and intents.
+
+#### An optional part
+
+For directing to the url in a brower to the app.  This will show the `index.html` which we don't have hear, but you could create.
+
+```
 /************************* OPTIONAL PARTS *************************/
 
 // Serve a static web page - for testing deployment
@@ -121,6 +137,7 @@ server.get(/.*/, restify.serveStatic({
 	'directory': '.',
 	'default': 'index.html'
 }));
+```
 
 
 
