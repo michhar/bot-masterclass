@@ -1,3 +1,14 @@
+## LUIS Model
+
+We will use LUIS again, but this time you will use a feature in the LUIS portal that allows us to import all of the intents, entities and utterences saved by another app creator (how kind!).
+
+1.  Again, go to [LUIS.AI](https://www.luis.ai)
+2.  We will use the ConfApp.json file in this directory so the easiest way would be to `git clone` this repo (which you may have already done) or download the repo as a zip file (from the repo's main page).
+3.  In LUIS portal click on "+New App" and then "Import Existing Application"
+4.  Select our ConfApp.json file and give the app a name then click "Import".
+5.  You should now be able to see in the app intents such as "wherespeaker" and entities such as "talk_title".
+
+
 
 ```javascript
 
