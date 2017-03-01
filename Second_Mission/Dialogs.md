@@ -1,7 +1,8 @@
-This Bot is part of a lab on how to create a simple hello world, dialog stack/promts and 
-old vs. new style (v3.5) bot.
+## Dialogs in action
 
-## Testing locally
+In this MS Bot Framework lab we learn how to create a simple hello world, work with the dialog stack, use promts, use state stores for our own data, and create cards.
+
+### Testing locally
 
 * Let's take care of the initialization of our project with the familiar commands:
 
@@ -12,7 +13,7 @@ old vs. new style (v3.5) bot.
 * Name your file `server.js` or somtehing similar
 * Run the bot from the command line using `node server.js` and then type anything to wake the bot up.
 
-There are some basic components all of our bots will have and this should look _very_ familiar.  You'll see your friend `restify` and the `createServer` method intializing a webserver.  You'll also see the use of a `server.post` which we saw in the Bootcamp from which we get client data.  And an addition, the `builder.ChatConnector` which will be the relay mechanism for messages.  This relay mechanism or method is leveraged both when we are just testing on localhost with the botframework-emulator as well as when our bot is deployed to the cloud. 
+There are some basic components all of our bots will have and this should look _very_ familiar.  You'll see your friend `restify` and the `createServer` method intializing a webserver.  You'll also see the use of a `server.post` which we saw in the Bootcamp from which we get client data.  There's an addition as well and that is the `builder.ChatConnector` which will be the relay mechanism for messages.  This relay mechanism or method is leveraged both when we are simply testing on localhost with the botframework-emulator as well as when our bot is deployed to the cloud. 
 
 ```javascript
 
@@ -46,14 +47,18 @@ Now let's create our bot.
 var bot = new builder.UniversalBot(connector);
 ```
 
-That was easy.  Notice we passed the `UniversalBot` constructor the connector, our message relay system.  This is the standard way in the Bot Framework and links our bot instance to this relay system.  
+That was easy.  Notice that we passed the `UniversalBot` constructor the connector, our message relay system.  This is the standard way in the Bot Framework to link our bot instance to this relay system.  
 
 We still need to decide what the experience is going to be and will do so with dialog handlers and logic.  Let's launch into some samples of what our bot could do.  Use this code in your `server.js` file and run it in the botframework-emulator as you go along to see a simulation of the chat experience.
 
-Sample 1.  It's simply an imerative that we must say Hello to the world.  Does this "/" or route-looking element look fammiliar?  It should, because this was how our `server.get` routing looked in Bootcamp.  This is what we call the **root dialog**.  Notice that instead of our "request, response, next" we have instead a `session`.  Sessions are just conversational models as well as objects.  All the elements we need for a conversation (including the data - remember our four types) are modeled and contained/referenced using this object.
+#### Exmaple 1
+
+It's simply an imerative that we must say Hello to the world.  Does this "/" or route-looking element look familiar?  If you recall this was how our `server.get` routing looked in Bootcamp.  This is what we call the **root dialog**.  Notice that instead of our "request, response, next" we have instead a `session`.  Sessions are just conversational models as well as objects.  All the elements we need for a conversation (including the data - remember our four types) are modeled and contained/referenced using this object.
 
 ```javascript
-// Dialog handling
+var bot = new builder.UniversalBot(connector);
+
+// Introducing our first piece of dialog logic
 bot.dialog('/', function (session) {
     session.send('Hello world');
 });
@@ -62,15 +67,16 @@ bot.dialog('/', function (session) {
 
 Now that we've said Hello to the world, let's create something more interesting.  Just for your reference, however, the "Hello world" bot is an example of a **closure**.
 
-Next we are going to see the built-in **prompt** used in a series of steps.  Interestingly, the built-in prompt takes care of many things for us one of which is calling that familiar `next` and another being that is passes on response data to the next step.
-
 #### Example 2
 
+Next we are going to see the built-in **prompt** used in a series of steps.  Interestingly, the built-in prompt takes care of many things for us one of which is calling that familiar `next` and another being that is passes on response data to the next step.
+
+* Do you see something different about this bot/dialog setup?
+* What is the part in the square brackets called?
+* What type of data does this built-in prompt expect?
+
+
 ```javascript
-
-
-/************* Example 2 **************/
-
 var bot = new builder.UniversalBot(connector, [
     function (session) {
         // Introducing a builtin prompt
@@ -83,20 +89,16 @@ var bot = new builder.UniversalBot(connector, [
 ]);
 ```
 
-For the above:
-* Do you see something different about this bot/dialog setup?
-* What is the part in the square brackets called?
-
 #### Example 3
 
+Now let's see the **dialog stack** in action where we encounter a method which begins a dialog and one that ends a dialog, pushing child dialogs onto a stack and back off again.  This is not only modularizing our code, it allows for more flexibility in our conversational app and dialog logic.  Here, we have a new dialog handler "askName" which is a child of the root.
+
+* What would happen if we replaced the child dialog's `session.endDialogWithResult` with just a `session.send`?  Is there some way to return to the original behavior?
+
+
 ```javascript
-
-/************* Example 3 **************/
-
-// Back to old style of non-root message handling
 var bot = new builder.UniversalBot(connector);
 
-// Think of a sandwich (the bread is the root dialog and meat/cheese the 'askName' dialog)
 bot.dialog('/', [
     function (session) {
         // "push" onto the dialog stack
@@ -121,9 +123,9 @@ bot.dialog('/askName', [ // this is a small waterfall
 
 #### Example 4
 
-```javascript
+The next code snippet exemplifies the use of the bot's **state** or storage "bags" to store some additional data.
 
-/************* Example 4 **************/
+```javascript
 
 // Setup bot and root waterfall - os this old or new style?
 var bot = new builder.UniversalBot(connector, [
@@ -147,13 +149,19 @@ var bot = new builder.UniversalBot(connector, [
     }
 ]);
 ```
+The four types of data bags are called in the Node.js SDK:
+
+* `userData`
+* `conversationData`
+* `privateConversationData`
+* `dialogData`
+
 
 #### Example 5
 
+Now we get to _build_ a message of our own creation and in this example we create a hero card.  Let's meet the `builder.Message` method in which we assemble the desired building blocks.  This is the way in which we create cards.  You'll see, again, the use of `endDialog` which pops that dialog logic off the stack and returns the results.
+
 ```
-
-/************* Example 5 **************/
-
 
 // Create a bot
 var bot = new builder.UniversalBot(connector);
@@ -188,8 +196,9 @@ bot.dialog('/cards', [
     }
 ]);
 
-// More samples here:  https://github.com/Microsoft/BotBuilder-Samples
-// And of course here:  https://github.com/Microsoft/BotBuilder/tree/master/Node/examples
 
 ```
+
+- More samples here:  https://github.com/Microsoft/BotBuilder-Samples
+- And here:  https://github.com/Microsoft/BotBuilder/tree/master/Node/examples
 
