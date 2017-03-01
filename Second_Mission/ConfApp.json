@@ -1,0 +1,427 @@
+{
+  "luis_schema_version": "1.3.1",
+  "versionId": "0.1",
+  "name": "Conference",
+  "desc": "For a conference bot",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "None"
+    },
+    {
+      "name": "whenspeaker"
+    },
+    {
+      "name": "wherespeaker"
+    },
+    {
+      "name": "wheretalk"
+    }
+  ],
+  "entities": [
+    {
+      "name": "room"
+    },
+    {
+      "name": "speaker"
+    },
+    {
+      "name": "talk_title"
+    }
+  ],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [],
+  "actions": [
+    {
+      "actionName": "whenspeaker",
+      "intentName": "whenspeaker",
+      "channel": {
+        "Name": "Http",
+        "Method": "JsonRequest",
+        "Settings": [
+          {
+            "Name": "ResponseTemplate",
+            "Value": ""
+          },
+          {
+            "Name": "Username",
+            "Value": ""
+          },
+          {
+            "Name": "Body",
+            "Value": ""
+          },
+          {
+            "Name": "Verb",
+            "Value": ""
+          },
+          {
+            "Name": "Url",
+            "Value": ""
+          },
+          {
+            "Name": "Password",
+            "Value": ""
+          }
+        ]
+      },
+      "actionParameters": []
+    },
+    {
+      "actionName": "wherespeaker",
+      "intentName": "wherespeaker",
+      "channel": {
+        "Name": "Http",
+        "Method": "JsonRequest",
+        "Settings": [
+          {
+            "Name": "Verb",
+            "Value": ""
+          },
+          {
+            "Name": "ResponseTemplate",
+            "Value": ""
+          },
+          {
+            "Name": "Username",
+            "Value": ""
+          },
+          {
+            "Name": "Body",
+            "Value": ""
+          },
+          {
+            "Name": "Password",
+            "Value": ""
+          },
+          {
+            "Name": "Url",
+            "Value": ""
+          }
+        ]
+      },
+      "actionParameters": []
+    }
+  ],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "bye",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "help",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "where is person1 speaking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "in which room is firstname lastname speaking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "room",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "speaker",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "where is name1 name2 speaking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "in which room is lastname talking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "room",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "speaker",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where can i find lastname's talk?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "in which location is lastname's talk?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "room",
+          "startPos": 2,
+          "endPos": 2
+        },
+        {
+          "entity": "speaker",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where do i go for generic talk name?",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 5,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "where is yoshua bengio's talk?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is david smith talking>",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is micheleen harris speaking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "find micheleen harris's talk",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "where is david smith's talk",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "when is persona speaking?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "at what time is this person talking?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "when's personfirst personlast talk?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 3,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "when does lastname talk?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "when does firstname lastname speak?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is data science for dummies located?",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "in which room is deep learning demystified going to be?",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 4,
+          "endPos": 6
+        },
+        {
+          "entity": "room",
+          "startPos": 2,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "location for some title?",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "find developing and deploying intelligent chat bots",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 1,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "find sql for the modern app",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 1,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "find python for data science tutorial",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 1,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "find the talk called python for data science",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 4,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "find data science with r talk",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 1,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "where is data science with r talk",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 2,
+          "endPos": 5
+        }
+      ]
+    }
+  ]
+}
