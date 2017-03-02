@@ -62,4 +62,4 @@ server.get('/news', function(req, res, next) {
 
 Note on data privacy:  for info on this, see the Bing section at https://privacy.microsoft.com/en-us/privacystatement.
 
-(If you were unsuccessful with getting the Bing Search key or didn't for whatever reason, head over to [this](https://gist.githubusercontent.com/michhar/42314f4c74611fd851d0b51cbaac3ab2/raw/a4e254b9b117b20616f03fcf54b0e9dec03cfcc4/api_info.json) gist for a key, but note it might have some lag if many people are using it).
+(If you were unsuccessful with getting the Bing Search key or didn't for whatever reason, head over to [this](https://gist.githubusercontent.com/michhar/42314f4c74611fd851d0b51cbaac3ab2/raw/e6ed5ce2b1201201e2b223b40c56beebeecd219c/api_info.json) gist for a key, but note it might have some lag if many people are using it).
