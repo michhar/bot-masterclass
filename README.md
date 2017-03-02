@@ -2,6 +2,7 @@
 
 [![Join the chat at https://gitter.im/conf-bots/Lobby](https://badges.gitter.im/conf-bots/Lobby.svg)](https://gitter.im/analytics-at-ms/conf-bots?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
+To get back to this repo, go to https://aka.ms/botedu
 
 ## Introduction
 
