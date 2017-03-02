@@ -1,6 +1,8 @@
 ## Recognizers in action
 
-This Bot demonstrates how to use an `EntityRecognizer` and `LuisRecognizer` along with an existing LUIS application to add quick functionality and natural language support to a bot.
+Recognizers are just objects that can pick up on or recognize a user's intent.  We can use LUIS models in our bots with a particular helper method for LUIS integration.  We could also create custom recognizers.  We will see both, but here mostly focus on the LUIS model recognizer.
+
+We will focus on how to use an `EntityRecognizer` and `LuisRecognizer` along with an existing LUIS application to add quick functionality and natural language support to a bot.  There is a portion on a custom recognizer as well.
 
 ### LUIS Model
 
@@ -53,9 +55,9 @@ Next, we define our recognizer using our LUIS model's endpoint URL from the LUIS
 
 * Can you add more than one recognizer of intents?  Can you have more than one LUIS model?
 
+(If you were unsuccessful with getting the LUIS model or didn't for whatever reason, head over to [this](https://gist.githubusercontent.com/michhar/42314f4c74611fd851d0b51cbaac3ab2/raw/a4e254b9b117b20616f03fcf54b0e9dec03cfcc4/api_info.json) gist for a key, but note it might have some lag if many people are using it).
 
-
-```
+```javascript
 // The model_url of format
 //  Replace the [] with your model information
 var model_url = process.env.LUIS_MODEL || "https://api.projectoxford.ai/luis/v2.0/apps/[model id goes here]?subscription-key=[key goes here]";
@@ -105,11 +107,15 @@ bot.dialog('/help', function (session) {
 ).triggerAction({ matches: /^help|^Help/i });
 ```
 
-Next, I'll leave it to you to add the wheretalk.
+#### LUIS add-on
+
+Add the "wheretalk" logic to this bot.
 
 * How well is this app performing?  Have you tried "Suggest" in the LUIS.AI portal for this model?  Go ahead and try this out.  Label anything that needs an label and hit "Submit".
 
 [This snippet](https://github.com/michhar/bot-education/tree/master/Student-Resources/BOTs/Node/bot-simpleintent) was taken from another bot-education repo in which simple (non-LUIS) intents are being handled.  Try adding this snippet to the above code.
+
+### Adding a simple hello intent
 
 * Are there other ways to incorporate this snippet?
 
@@ -120,10 +126,52 @@ intents.matches(/^hi|^Hi|^hello|^Hello|^hey|^howdy/i, function(session) {
 });
 ```
 
+### A made-just-for-you recognizer (non-LUIS) or custom recognizer
 
-### Advanced exercise
+Take the following code and add this to your bot to add some new intent and dialog logic.
 
-Add options to enter date and time to the LUIS model and handle the behavior in this app with dialogs and intents.
+Notice a few things in the "coffeeDialog".  There's a confirmation prompt and an example of using a `triggerAction` which will interrupt any ongoing dialog if the user types "[Cc]offee".
+
+```javascript
+
+// Install a custom recognizer to look for user saying 'food' or 'coffee' to get them to the right place
+bot.recognizer({
+    recognize: function (context, done) {
+        var intent = { score: 0.0 };
+        if (context.message.text) {
+            switch (context.message.text.toLowerCase()) {
+                case 'food':
+                    intent = { score: 1.0, intent: 'Food' };
+                    break;
+                case 'coffee':
+                    intent = { score: 1.0, intent: 'Coffee' };
+                    break;
+            }
+        }
+        done(null, intent);
+    }
+});
+
+// Add help dialog with a trigger action bound to the 'Hours' intent
+bot.dialog('coffeeDialog',  [
+    function (session) {
+        builder.Prompts.confirm(session, "Are you looking for coffee?");
+    },
+    function (session, results) {
+        if (results.response == true) {
+            session.endDialog("Coffee rocks");
+        } else {
+            session.endDialog("We also have tea and juice.");
+        }
+    }
+]
+).triggerAction({ matches: 'Coffee' });
+
+```
+
+What does "coffeeDialog"'s `results.response` look like?  Go ahead and log that out with `console.log`.
+
+Now, create a "foodDialog" to handle someone looking for the food at a conference.  How would you handle this?  Would you use built-in confirmation prompts as well?
 
 #### An optional part
 
