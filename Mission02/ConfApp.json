@@ -118,6 +118,26 @@
       "entities": []
     },
     {
+      "text": "hi",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hello",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "yes",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "howdy",
+      "intent": "None",
+      "entities": []
+    },
+    {
       "text": "where is person1 speaking?",
       "intent": "wherespeaker",
       "entities": [
@@ -265,6 +285,50 @@
       ]
     },
     {
+      "text": "find micheleen harris talk",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 1,
+          "endPos": 2
+        }
+      ]
+    },
+    {
+      "text": "where is sandy smith speaking?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is micheleen harris's talk",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "where is andreas mueller's talk?",
+      "intent": "wherespeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
       "text": "when is persona speaking?",
       "intent": "whenspeaker",
       "entities": [
@@ -310,6 +374,17 @@
     },
     {
       "text": "when does firstname lastname speak?",
+      "intent": "whenspeaker",
+      "entities": [
+        {
+          "entity": "speaker",
+          "startPos": 2,
+          "endPos": 3
+        }
+      ]
+    },
+    {
+      "text": "when is david smith's talk",
       "intent": "whenspeaker",
       "entities": [
         {
@@ -420,6 +495,28 @@
           "entity": "talk_title",
           "startPos": 2,
           "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "where is the data science for dummies talk",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 3,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "where is the data science talk at?",
+      "intent": "wheretalk",
+      "entities": [
+        {
+          "entity": "talk_title",
+          "startPos": 3,
+          "endPos": 4
         }
       ]
     }
