@@ -1,0 +1,101 @@
+{
+  "luis_schema_version": "1.3.1",
+  "versionId": "0.1",
+  "name": "Mars",
+  "desc": "",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "GetNews"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "closedLists": [],
+  "bing_entities": [
+    "geography"
+  ],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "i'd like to buy an elephant",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i'd like the current maps for istanbul",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i'd like to have the latest brad of shoes",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i'd like the happenings at work",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i'd like a cup of coffee",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i'd like the freshest strawberries",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "get news in seattle",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "find the news for san francisco",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "i'd like the current news in tokyo",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "get the latest news in mexico city",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "find news in sydney",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "the latest happenings in vancouver",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "what's going on it brazil",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "any news reports from the middle east",
+      "intent": "GetNews",
+      "entities": []
+    },
+    {
+      "text": "i'd like to have the news for london",
+      "intent": "GetNews",
+      "entities": []
+    }
+  ]
+}
