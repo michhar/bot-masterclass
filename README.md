@@ -8,7 +8,7 @@ To get back to this repo, go to https://aka.ms/botedu
 
 This tutorial is designed for developers and data scientists. It will ramp up the attendee quickly on the Microsoft Bot Framework as a development tool/portal and the Cognitive Services APIs for intelligence, linking the two in the creation of an intelligent chat bot for conversational platforms. Thoughtful design, much like in Data Science, as well as user experience will be emphasized to create the best bot experiences.
 
-Instructor: Micheleen Harris (michhar\<at\>microsoft\<dot\>com)
+Instructor: Micheleen Harris (michhar\<at\>microsoft\<dot\>com) (@rheartpython on twitter)
 
 ## Quick Links
 
