@@ -56,10 +56,9 @@ Let's add another utterance saying "Can I get the news in London".  Go ahead and
 
 1.  On the **Intents** page, click the intent name "GetNews" to open its details page, with **Utterances** as the current tab.
 2.  Label the utterance from above (_Give me the news in Singapore_) by clicking on "Singapore" and selecting "Location" from the drop-down.
-
 ![labeling utterance](images/labeling_utterance.png)
 3.  Add a new utterance like _Can I get the news in London_ and _I'd like the news report for New York City_
-4.  Label the locations as "Location" (you may need to pull the bracket to expand over cities with multiple words)
+4.  Label the locations as "Location" (you may need to highlight all words to move the bracket to expand over cities with multiple words)
 5.  Add a few more including off-the-wall ones like "I'm from Mars" to see how well it's getting the intent.
 6.  Press **Save**
 
