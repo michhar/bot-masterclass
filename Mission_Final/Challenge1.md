@@ -1,14 +1,25 @@
 # Building our Bot
 
-The bot we made in Mission 1 currently doesn't do much. In this part, we'll be building out the logic of our bot so it actually starts being useful and gives us news. 
+The bot we made in the [Assemble](Assemble.md) phase currently doesn't do much. In this part, we'll be building out the logic of our bot so it actually starts being useful and gives us news. 
 
-## Mission 2: Get News
+## Challenge 1: Get News
 
 ### Setting up LUIS
 
-Before starting on this tutorial, we first need to make our bot understand natural language. Follow this [tutorial](LUIS.MD) to make your bot work with LUIS.
+Before starting on this tutorial, we first need to make our bot understand natural language. If you haven't created a "GetNews" LUIS model go back to the [LUIS](../Mission01/LUIS.md) lab in Mission01 to get your endpoint URL.
 
-### After setting up LUIS
+### Connecting LUIS to your bot
+Connecting LUIS to your bot is as simple as pasting the publish URL into the intent dialog you already have.
+
+```js
+var luisRecognizer = new builder.LuisRecognizer('Your publish URL here');
+var intentDialog = new builder.IntentDialog({recognizers: [luisRecognizer]});
+bot.dialog('/', intentDialog);
+```
+
+After that, your bot will be able to understand natural language.
+
+### After setting up LUIS and connecting it to the bot
 
 We're moving on to more complex stuff now. Let's try fetching news based on category so we can stay updated with civilisation.
 
@@ -23,9 +34,7 @@ We're gonna go to CNN and copy paste the headlines manually into our bot. Just k
 - [Market Codes for Bing](https://msdn.microsoft.com/en-us/library/dn783426.aspx)
 - [Categories for Bing News by market](https://msdn.microsoft.com/en-us/library/dn760793(v=bsynd.50).aspx#categoriesbymarket)
 
-To start using the Bing News API, we will need a subscription key. We can get one in a similar manner as how we got our LUIS subscription key. Go to the [Azure portal](https://portal.azure.com) and log in. Then click + New and search for Cognitive Services. Create a new Cognitive Services API instance, and make sure you select Bing Search APIs in the API type field. 
-
-![SearchApi](Images/Mission2/searchapi.PNG)
+To start using the Bing News API, we will need a subscription key. We hopefully have already done this in the [News](../Mission01/NEWS.md) lab in Mission01.
 
 Now that you have your subscription key (you can use either key 1 or key 2, it doesn't matter), you can go to the [API testing console](https://dev.cognitive.microsoft.com/docs/services/56b43f72cf5ff8098cef380a/operations/56f02400dbe2d91900c68553) and play around with the API if you'd like. Try sending some requests and see the responses you get. [Here](https://msdn.microsoft.com/en-us/library/dn760793(v=bsynd.50).aspx#categoriesbymarket) are all the possible categories for Category News by the way. 
 
