@@ -1,6 +1,6 @@
-#Microsoft Bot Framework Hands-On Lab: Mars Challenge
+#Microsoft Bot Framework Hands-On Lab: Mars Mission
 
-Welcome to the Mars Challenge. The Mars Challenge is a series of hands-on labs with a twist to it... You will be briefed on your missions later on in the lab. 
+Welcome to the Mars Mission. The Mars Mission is a series of hands-on labs with a twist to it... You will be briefed on each phase of the mission later on in the lab. You'll need to ensure you have the Prerequisites done before starting the mission.
 
 **Please do NOT click into any other pages in this repo until told to do so!**
 
@@ -9,14 +9,16 @@ Welcome to the Mars Challenge. The Mars Challenge is a series of hands-on labs w
 - Install [NodeJS](https://nodejs.org/en/). After you've installed this, open your command line and run `npm install npm -g`. This updates Node's Package Manager (npm) to the latest version.
 - Install [Visual Studio Code](https://code.visualstudio.com/) (or any other code editor of your choice)
 - Install [Bot Framework emulator](https://emulator.botframework.com)
-- Azure account if you plan on deploying your bot to a channel in the Bot Framework Developer Portal - basically making it available to the world on many channels supported (Skype, Slack, Kik, etc.).
+- Azure account if you plan on deploying your bot in **Launch** phase to a channel in the Bot Framework Developer Portal - basically making it available to the world on many channels supported (Skype, Slack, Kik, etc.).
 
-###Lab content
+###Mars mission phases (_aka_ Lab content)
 
-- **Mission 1:** Creating the bot and linking to LUIS (you've already made this model)
-- **Mission 2:** Getting news from Earth through the bot
-- **Mission 3:** Identifying objects using the Computer Vision API (DIY Challenge)
-- **Connect:** Connecting the bot to other channels
+Your mission has phases.  Go through each phase to completion and then move on to the next.  The final phase will allow you to deploy your bot to Azure for use on channels like Skype, Teams, Slack, etc. 
+
+- **[Assemble](Assemble.md):** Setting up our project and linking to LUIS (this is the model you made in the [LUIS](../Mission01/LUIS.md) part of Mission01)
+- **[Challenge 1](Challenge1.md):** Getting news from Earth through the bot
+- **[Challenge 2](Challenge2.md):** Identifying objects using the Computer Vision API (DIY Challenge)
+- **[Launch](Launch.md):** Connecting the bot to other channels
 
 ###Links to get started
 
