@@ -1,14 +1,22 @@
-# Welcome to the Developing and Deploying Intelligent Chat Bots Class
+# Welcome to the Developing and Deploying Intelligent Chat Bots 1/2 Day Course
 
 [![Join the chat at https://gitter.im/conf-bots/Lobby](https://badges.gitter.im/conf-bots/Lobby.svg)](https://gitter.im/analytics-at-ms/conf-bots?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
-To get back to this repo, go to https://aka.ms/botedu
-
 ## Introduction
 
-This tutorial is designed for developers and data scientists. It will ramp up the attendee quickly on the Microsoft Bot Framework as a development tool/portal and the Cognitive Services APIs for intelligence, linking the two in the creation of an intelligent chat bot for conversational platforms. Thoughtful design, much like in Data Science, as well as user experience will be emphasized to create the best bot experiences.
+This short course is designed for developers and data scientists. It is a fun set of hands-on labs that build upon each other interweaving Microsoft Cognitive Services and the Bot Framework that, by the end, results in an intelligent chat bot that can be used on channels like Skype, Teams, and Slack among others.
 
-Instructor: Micheleen Harris (michhar\<at\>microsoft\<dot\>com) (@rheartpython on twitter)
+## Learning path for students
+
+Your mission if you choose to accept is to perform the following sets of labs in order (they build on each other).
+
+**If you are self-guided, note that there are handouts for this course in the Extras folder**
+
+1.  **[Prerequisites](#prerequisites)**:  You must take care of these to see this course through.
+1.  **[Bootcamp](Bootcamp)**:  A quick, fun and fast introduction to the idea of webservers in Node.js (relates closely to bots)
+2.  **[Mission01](Mission01)**:  A set of labs for creating a webserver to call Bing News and Language Understanding and Intelligent Service (intended to be instructor-guided)
+3.  **[Mission02](Mission02)**:  A set of labs creating your first set of chat bots with the Micrsoft Bot Framework (intended to be instructor-guided)
+4.  **[Mission_Final](Mission_Final)**:  A set of challenges/labs to create an intelligent chat bot to check the news on Earth and identify objects in images - both useful if living on a different planet (this is a fun, challenging set of labs for independent work).
 
 ## Quick Links
 
