@@ -59,3 +59,7 @@ We will assume you have already have the following background:
 * **1st Hr**:  Welcome, Bootcamp and Peek into Microsoft Cognitive Services
 * **2nd Hr**:  Dive into the Microsoft Bot Framework with Exercises
 * **3rd and 4th Hr**:  Mars Mission Hands-On Lab and Closing (What Next?)
+
+## Credits
+
+The final mission was based on an HOL by Alyssa Ong at:  https://github.com/alyssaong1/Bot-Framework-HOL
