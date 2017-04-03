@@ -40,6 +40,14 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 
 ```
 
+And of course we need the bot and a connection from the bot to the connector (which when deployed will actually link us to the Bot Framework Connector).
+
+```javascript
+var bot = new builder.UniversalBot(connector);
+```
+
+Our bot has no dialog logic, so let's begin the process of recognizing user intents with LUIS.
+
 ### Setting up LUIS
 
 Before starting on this tutorial, we first need to make our bot understand natural language. If you haven't created a "GetNews" LUIS model go back to the [LUIS](../Mission01/LUIS.md) lab in Mission01 to get your endpoint URL.
