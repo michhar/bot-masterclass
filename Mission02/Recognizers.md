@@ -4,24 +4,13 @@ Recognizers are just objects that can pick up on or recognize a user's intent.  
 
 We will focus on how to use an `EntityRecognizer` and `LuisRecognizer` along with an existing LUIS application to add quick functionality and natural language support to a bot.  There is a portion on a custom recognizer as well.
 
-### LUIS Model
-
-We will use LUIS again, but this time you will use a feature in the LUIS portal that allows us to import all of the intents, entities and utterences saved by another app creator (how kind!).
-
-1.  Again, go to [LUIS.AI](https://www.luis.ai)
-2.  We will use the ConfApp.json file in this directory so the easiest way would be to `git clone` this repo (which you may have already done) or download the repo as a zip file (from the repo's main page).
-3.  In LUIS portal click on "+New App" and then "Import Existing Application"
-4.  Select our ConfApp.json file and give the app a name then click "Import".
-5.  You should now be able to see in the app intents such as "wherespeaker" and entities such as "talk_title".
-6.  Enter some more utterences and label them.
-7.  Retrain using the Train button.
-8.  Click on Publish and publish this app, noting the URL endpoint given (we'll use in a minute).
+Now, let's make this smart bot!
 
 ### Testing locally
 
-We saw how to initialize our project in `Dialogs.md` so refer back if you have a new folder without a `package.json` file.
+We saw how to initialize our project in `Dialogs.md` so refer back on how to create your `package.json` in this new folder (here's the [link](https://github.com/michhar/bot-masterclass/blob/master/Mission02/Dialogs.md#testing-locally) to refer back).
 
-Also, in `Dialogs.md` we learnt about the basic components we begin with for a bot app in the Bot Framework.  Let's add these to our new `server.js` file.
+Also, in `Dialogs.md` we learnt about the basic components we begin with for a bot in the Bot Framework.  Let's add these same ones to our new `server.js` file.
 
 ```javascript
 
@@ -51,131 +40,143 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 
 ```
 
-Next, we define our recognizer using our LUIS model's endpoint URL from the LUIS.AI portal.
+### Setting up LUIS
 
-* Can you add more than one recognizer of intents?  Can you have more than one LUIS model?
+Before starting on this tutorial, we first need to make our bot understand natural language. If you haven't created a "GetNews" LUIS model go back to the [LUIS](../Mission01/LUIS.md) lab in Mission01 to get your endpoint URL.
 
-(If you were unsuccessful with getting the LUIS model or didn't for whatever reason, head over to [this](https://gist.githubusercontent.com/michhar/42314f4c74611fd851d0b51cbaac3ab2/raw/a4e254b9b117b20616f03fcf54b0e9dec03cfcc4/api_info.json) gist for a key, but note it might have some lag if many people are using it).
+### Connecting LUIS to your bot
 
-```javascript
-// The model_url of format
-//  Replace the [] with your model information
-var model_url = process.env.LUIS_MODEL || "https://api.projectoxford.ai/luis/v2.0/apps/[model id goes here]?subscription-key=[key goes here]";
+Connecting LUIS to your bot is as simple as pasting the publish URL into the intent dialog you already have.
 
-// Create LUIS recognizer that points at our model and add it as the root '/' dialog for our Bot.
-var recognizer = new builder.LuisRecognizer(model_url);
-var intents = new builder.IntentDialog({ recognizers: [recognizer] });
-
-
-// Setup bot and default message handler
-var bot = new builder.UniversalBot(connector);
-
-// Add the intent dialogs to the root logic of the bot
-bot.dialog('/', intents);
-
-// When a user expresses the intent to find out where a speaker is talking,
-// this dialog (just confirming at this point) is spawned
-intents.matches('wherespeaker', [ 
-    function (session, args, next) {
-        var intent = args.intent;
-        var speaker = builder.EntityRecognizer.findEntity(intent.entities, 'speaker');
-        if (!speaker) {
-            builder.Prompts.text(session, 
-                "What is the first and last name of the speaker?");
-        } else {
-            next({ response: speaker });
-        }
-    },
-    function (session, results) {
-        if (results.response) {
-            session.send("Ok...it looks like you are trying to find the location of a talk by %s.", 
-                results.response);
-        } else {
-            session.send("Ok");
-        }
-    }
-]
-);
-
-intents.onDefault(builder.DialogAction.send("Hi, I'm a conference bot.  Try 'help' for more info."));
-
-// Add help dialog with a trigger action bound to the 'Help' intent
-bot.dialog('/help', function (session) {
-    session.endDialog("try asking:<br>What time is personA's talk?<br>or<br>Where is personB speaking?");
-}
-// a trigger for dialog added here for help
-).triggerAction({ matches: /^help|^Help/i });
+```js
+var luisRecognizer = new builder.LuisRecognizer('Your publish URL here');
+var intentDialog = new builder.IntentDialog({recognizers: [luisRecognizer]});
+bot.dialog('/', intentDialog);
 ```
 
-#### LUIS add-on
+After that, your bot will be able to understand natural language.
 
-Add the "wheretalk" logic to this bot.
+What do you think the answers to these questions are?
 
-* How well is this app performing?  Have you tried "Suggest" in the LUIS.AI portal for this model?  Go ahead and try this out.  Label anything that needs an label and hit "Submit".
+* Can you add more than one recognizer of intents?  
+* Can you have more than one LUIS model in a bot?
 
-[This snippet](https://github.com/michhar/bot-education/tree/master/Student-Resources/BOTs/Node/bot-simpleintent) was taken from another bot-education repo in which simple (non-LUIS) intents are being handled.  Try adding this snippet to the above code.
+### After setting up LUIS and connecting it to the bot
 
-### Adding a simple hello intent
+**By the way, you'll see this again in the Final Mission with more complexity**
 
-* Are there other ways to incorporate this snippet?
+Let's try fetching news based on category so we can stay updated with civilisation.
 
-```javascript
-// Just-say-hi intent logic
-intents.matches(/^hi|^Hi|^hello|^Hello|^hey|^howdy/i, function(session) {
-    session.send("Hi there!");
+**NOTE: We will be asking you questions at the end of this so do not just copy and paste without understanding what is going on.**
+
+**So what are we using to get the news?**
+
+We're gonna go to CNN and copy paste the headlines manually into our bot. Just kidding. We'll be using the [Bing News API](https://www.microsoft.com/cognitive-services/en-us/bing-news-search-api). We can use it to get top news by categories, search the news, and get trending topics. I highly suggest briefly looking through the following links to familiarise yourself with the API:
+
+- [Endpoints and examples of requests and responses](https://msdn.microsoft.com/en-us/library/dn760783.aspx)
+- [Parameters for requests](https://msdn.microsoft.com/en-us/library/dn760793(v=bsynd.50).aspx)
+- [Market Codes for Bing](https://msdn.microsoft.com/en-us/library/dn783426.aspx)
+- [Categories for Bing News by market](https://msdn.microsoft.com/en-us/library/dn760793(v=bsynd.50).aspx#categoriesbymarket)
+
+To start using the Bing News API, we will need a subscription key. We hopefully have already done this in the [News](../Mission01/NEWS.md) lab in Mission01.
+
+Now that you have your subscription key (you can use either key 1 or key 2, it doesn't matter), you can go to the [API testing console](https://dev.cognitive.microsoft.com/docs/services/56b43f72cf5ff8098cef380a/operations/56f02400dbe2d91900c68553) and play around with the API if you'd like. Try sending some requests and see the responses you get. [Here](https://msdn.microsoft.com/en-us/library/dn760793(v=bsynd.50).aspx#categoriesbymarket) are all the possible categories for Category News by the way. 
+
+
+**Ok cool, now how do we link the news to the bot?**
+
+Let's start off by getting the bot to understand us when we try to look for news or scan an image. Make sure your intentsDialog.matches line looks like below.
+
+Also, don't forget about your LUIS recognizer and bot root dialog from the Mission1 [part](MISSION1.md).  You'll need this code as well so go ahead and paste it in.
+
+```js
+intentDialog.matches(/\b(hi|hello|hey|howdy)\b/i, '/sayHi')
+    .matches('GetNews', '/topNews')
+    .onDefault(builder.DialogAction.send("Sorry, I didn't understand what you said."));
+```
+
+Also, let's be friendly and add a dialog handler for 'sayHi' as follows:
+
+```js
+bot.dialog('/sayHi', function(session) {
+    session.send('Hi there!  Try saying things like "Get news in Toyko"');
+    session.endDialog();
 });
 ```
 
+Go ahead and run your bot code from the command line as you have been with `node server.js`.
+
+Basically, when the user's utterance comes in to the bot, it gets checked against the regex first. If none of the regexes match, it will make a call to LUIS and route the message to the intent that it matches to. Add this snippet of code at the end to create a dialog for top news:
+
+```js
+bot.dialog('/topNews', [
+    function (session){
+        // Ask the user which category they would like
+        // Choices are separated by |
+        builder.Prompts.choice(session, "Which category would you like?", "Technology|Science|Sports|Business|Entertainment|Politics|Health|World|(quit)");
+    }, function (session, results){
+        var userResponse = results.response.entity;
+        session.endDialog("You selected: " + userResponse);
+    }
+]);
+```
+
+Try using natural language to ask your bot for news - it should work perfectly. :) Notice that if you ask it to analyse an image it's gonna crash. That's because we haven't written out any dialogs called '/analyseImage' yet.
+
+#### LUIS Interactive Learning in the portal
+
+* How well is this app performing?  Have you tried "Suggest" in the LUIS.AI portal for this model?  Go ahead and try this out.  Label anything that needs an label and hit "Submit".
+
 ### A made-just-for-you recognizer (non-LUIS) or custom recognizer
 
-Take the following code and add this to your bot to add some new intent and dialog logic.
+Take the following code and add this to your bot to add some new intent and dialog logic.  Does it work as expected?
 
-Notice a few things in the "coffeeDialog".  There's a confirmation prompt and an example of using a `triggerAction` which will interrupt any ongoing dialog if the user types "[Cc]offee".
+Notice a few things in the "twitterDialog".  There's a confirmation prompt and an example of using a `triggerAction` which will interrupt any ongoing dialog if the user types "[Tt]witter".
 
 ```javascript
 
-// Install a custom recognizer to look for user saying 'food' or 'coffee' to get them to the right place
+// Install a custom recognizer to look for user saying 'twitter' to get them to the right place - we'll need more useful logic later
 bot.recognizer({
     recognize: function (context, done) {
         var intent = { score: 0.0 };
         if (context.message.text) {
             switch (context.message.text.toLowerCase()) {
-                case 'food':
-                    intent = { score: 1.0, intent: 'Food' };
+                case 'twitter':
+                    intent = { score: 1.0, intent: 'Twitter' };
                     break;
-                case 'coffee':
-                    intent = { score: 1.0, intent: 'Coffee' };
-                    break;
+//                case 'other_case':
+//                    intent = { score: 1.0, intent: 'something_else_here' };
+//                    break;
             }
         }
         done(null, intent);
     }
 });
 
-// Add help dialog with a trigger action bound to the 'Hours' intent
-bot.dialog('coffeeDialog',  [
+// Add help dialog with a trigger action bound to the 'Twitter' intent from the custom recognizer above
+bot.dialog('twitterDialog',  [
     function (session) {
-        builder.Prompts.confirm(session, "Are you looking for coffee?");
+        builder.Prompts.confirm(session, "Are you looking for twitter?");
     },
     function (session, results) {
         if (results.response == true) {
-            session.endDialog("Coffee rocks");
+            session.endDialog("Twitter rocks");
         } else {
-            session.endDialog("We also have tea and juice.");
+            session.endDialog("Try a bing web search for other types of social media.");
         }
     }
 ]
-).triggerAction({ matches: 'Coffee' });
+).triggerAction({ matches: /^twitter/i });
 
 ```
 
-What does "coffeeDialog"'s `results.response` look like?  Go ahead and log that out with `console.log`.
+What does "twitterDialog"'s `results.response` look like?  Go ahead and log that out with `console.log`.
 
-Now, create a "foodDialog" to handle someone looking for the food at a conference.  How would you handle this?  Would you use built-in confirmation prompts as well?
+Now, create a "facebookDialog" to handle someone looking for the facebook info.  How would you handle this?  Would you use built-in confirmation prompts as well?  Try it out and create a useful or intriguing response.
 
-#### An optional part
+#### An optional part for checking the Web Service after deployment
 
-For directing to the url in a brower to the app.  This will show the `index.html` which we don't have hear, but you could create.
+For directing to the url in a brower to the app.  This will show the `index.html` which we don't have here, but you could create. This helps with knowing your App Service is running successfully.
 
 ```
 /************************* OPTIONAL PARTS *************************/
