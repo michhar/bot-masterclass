@@ -2,6 +2,8 @@
 
 In this MS Bot Framework lab we learn how to create a simple hello world, work with the dialog stack, use promts, use state stores for our own data, and create cards.
 
+Make sure to read through the comments in the code that explain in a step-by-step fashion what is happening.
+
 ### Testing locally
 
 * Let's take care of the initialization of our project with the familiar commands:
@@ -13,28 +15,35 @@ In this MS Bot Framework lab we learn how to create a simple hello world, work w
 * Name your file `server.js` or somtehing similar
 * Run the bot from the command line using `node server.js` and then type anything to wake the bot up.
 
-There are some basic components all of our bots will have and this should look _very_ familiar.  You'll see your friend `restify` and the `createServer` method intializing a webserver.  You'll also see the use of a `server.post` which we saw in the Bootcamp from which we get client data.  There's an addition as well and that is the `builder.ChatConnector` which will be the relay mechanism for messages.  This relay mechanism or method is leveraged both when we are simply testing on localhost with the botframework-emulator as well as when our bot is deployed to the cloud. 
+There are some basic components all of our bots will have and this should look _very_ familiar.  You'll see your friend `restify` and the `createServer` method intializing a webserver.  You'll also see the use of a `server.post` which we saw in the Bootcamp from which we get client data.  There's an addition as well and that is the `builder.ChatConnector` which will be the linker to a relay mechanism for messages.  This linker is leveraged both when we are simply testing on localhost with the **botframework-emulator** as well as when our bot is registered with the Bot Framework and deployed to the cloud.
+
+You are encouraged to read through the comments for more detail.
 
 ```javascript
 
-// Required packages
+// Import required packages
 var builder = require('botbuilder');
 var restify = require('restify');
 
 /***************************** SETUP  ************************* */
 
-// Connector options
+// These values are filled in once a Microsoft Application (MSA) is created
+// The MSA provides a link for this bot to the Bot Framework during registration
 var botConnectorOptions = {
     appId: process.env.MICROSOFT_APP_ID || "",
     appPassword: process.env.MICROSOFT_APP_PASSWORD || ""
 };
 
-// Instatiate the chat connector to route messages
+// Connector object to include a hook into the BF Connector (after registration)
 var connector = new builder.ChatConnector(botConnectorOptions);
 
-// Handle Bot Framework messages with a restify server
+// The RESTful server - remember our bot is essentially a webserver
 var server = restify.createServer();
+
+// This is for data coming in or POSTed to our server (the bot) from a client (the user)
 server.post('/api/messages', connector.listen());
+
+// This specifies a port to handle http requests/traffic
 server.listen(process.env.port || process.env.PORT || 3978, function () { 
     console.log('%s listening to %s', server.name, server.url); 
 });
@@ -43,17 +52,22 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
 Now let's create our bot.
 
 ```javascript
-// Create a bot
+// Bot object linked to the connector object for all of its logic and helpers
+// After the bot is registered with the Bot Framework the connector object wraps up
+//   the logic needed to use the Bot Framework's Connector for message routing to
+//    official channels like Skype or Slack
+//  UniversalBot will give us all of the handling needed for dialog logic
+
 var bot = new builder.UniversalBot(connector);
 ```
 
-That was easy.  Notice that we passed the `UniversalBot` constructor the connector, our message relay system.  This is the standard way in the Bot Framework to link our bot instance to this relay system.  
+That was easy.  Notice that we passed the connector object to the `UniversalBot` constructor to link to a message relay system (eventually, the Bot Framework Connector itself).  This is the standard way in the Bot Framework to link our bot to real channels like Skype or Slack (which utilize the Bot Framework Connector in the cloud).  For now, we are going to use the **botframework-emulator** to simulate the Bot Framework Connector, giving us an experience analogous to a bot deployed in the cloud.
 
-We still need to decide what the experience is going to be and will do so with dialog handlers and logic.  Let's launch into some samples of what our bot could do.  Use this code in your `server.js` file and run it in the botframework-emulator as you go along to see a simulation of the chat experience.
+We still need to decide what the experience is going to be and will do so with dialog handlers and logic.  Let's launch into some samples of what our bot could do.  Use this code in your `server.js` file and run it in the **botframework-emulator** as you go along to see a simulation of the chat experience.
 
 #### Exmaple 1
 
-It's simply an imerative that we must say Hello to the world.  Does this "/" or route-looking element look familiar?  If you recall this was how our `server.get` routing looked in Bootcamp.  This is what we call the **root dialog**.  Notice that instead of our "request, response, next" we have instead a `session`.  Sessions are just conversational models as well as objects.  All the elements we need for a conversation (including the data - remember our four types) are modeled and contained/referenced using this object.
+It's simply an imperative that we must say Hello to the world.  Does this "/" or route-looking element look familiar?  If you recall this was how our `server.get` routing looked in Bootcamp if you had a chance to do that.  This is what we call the **root dialog**.  Notice that instead of our "request, response, next" we have instead a `session`.  Sessions are just conversational models as well as objects.  All the elements we need for a conversation (including the data - remember our four types) are modeled and contained/referenced using this object.
 
 ```javascript
 var bot = new builder.UniversalBot(connector);
@@ -161,7 +175,7 @@ The four types of data bags are called in the Node.js SDK:
 
 Now we get to _build_ a message of our own creation and in this example we create a hero card.  Let's meet the `builder.Message` method in which we assemble the desired building blocks.  This is the way in which we create cards.  You'll see, again, the use of `endDialog` which pops that dialog logic off the stack and returns the results.
 
-```
+```javascript
 
 // Create a bot
 var bot = new builder.UniversalBot(connector);
