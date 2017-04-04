@@ -44,7 +44,7 @@ server.listen(3978, function() {
 
 ```
 
-Fist we are importing the [restify](http://restify.com) library to set up a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) webserver.
+First we are importing the [restify](http://restify.com) library to set up a [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) webserver.
 
 We then create a function, `respond`, which we'll use as a [callback](https://docs.nodejitsu.com/articles/getting-started/control-flow/what-are-callbacks/) for responding to a client (remember this code is meant to run on a server).
 
