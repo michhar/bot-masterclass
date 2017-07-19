@@ -1,4 +1,4 @@
-#BONUS MISSION: Connecting the bot to messaging channels
+# BONUS MISSION: Connecting the bot to messaging channels
 
 ## Introuction
 
